@@ -2,8 +2,8 @@ package xml_feed;
 
 public class Localizacion {
 	private Integer pasillo;
-	private String estanteria;
-	private String estante;
+	private Integer estanteria;
+	private Integer estante;
 	@Override
 	public String toString() {
 		return "<localizacion>"
@@ -12,7 +12,8 @@ public class Localizacion {
 				+ "\n\t<estante>"+estante+"</estante>"
 				+"</localizacion>";
 	}
-	public Localizacion(Integer pasillo, String estanteria, String estante) {
+	
+	public Localizacion(Integer pasillo, Integer estanteria, Integer estante) {
 		this.pasillo = pasillo;
 		this.estanteria = estanteria;
 		this.estante = estante;
@@ -35,28 +36,29 @@ public class Localizacion {
 	/**
 	 * @return the estanteria
 	 */
-	public String getEstanteria() {
+	public Integer getEstanteria() {
 		return estanteria;
 	}
 
 	/**
 	 * @param estanteria the estanteria to set
 	 */
-	public void setEstanteria(String estanteria) {
+	public void setEstanteria(Integer estanteria) {
 		this.estanteria = estanteria;
 	}
 
 	/**
 	 * @return the estante
 	 */
-	public String getEstante() {
+	public Integer getEstante() {
 		return estante;
 	}
 
 	/**
 	 * @param estante the estante to set
 	 */
-	public void setEstante(String estante) {
+	public void setEstante(Integer estante) {
 		this.estante = estante;
 	}
+	
 }

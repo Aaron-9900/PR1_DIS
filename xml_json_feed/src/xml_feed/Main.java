@@ -108,8 +108,8 @@ public class Main {
 						break;
 					case 4:
 						Direccion direccion = new Direccion("Cerro del Espino", 9, 28221, "Madrid", "Espanya");
-						Localizacion localizacion1 = new Localizacion(10, "A", "AC");
-						Localizacion localizacion2 = new Localizacion(11, "D", "AP");
+						Localizacion localizacion1 = new Localizacion(10, 1, 2);
+						Localizacion localizacion2 = new Localizacion(11, 4, 2);
 						Producto producto1 = new Producto(213, "Alfombra fashion", "Alfombra del siglo XII", 12, localizacion1, 29);
 						Producto producto2 = new Producto(209, "TV 4K Samsung", "Television curva cara", 29, localizacion2, 10029);
 						ArrayList<Producto> productos = new ArrayList<Producto>();
