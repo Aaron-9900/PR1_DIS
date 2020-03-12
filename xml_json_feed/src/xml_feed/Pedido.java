@@ -10,9 +10,9 @@ public class Pedido {
 	@Override
 	public String toString() {
 		return "<pedido>"
-				+ "\n\t" + direccion.toString()
-				+ "\n\t" + destinatario.toString()
-				+ "\n\t" + getProductListXML()
+				+ "" + direccion.toString()
+				+ "" + destinatario.toString()
+				+ "" + getProductListXML()
 				+"</pedido>";
 	}
 	public Pedido(ArrayList<Producto> productos, ArrayList<Integer> cantidades ,Direccion direccion, Cliente destinatario) {
@@ -25,9 +25,11 @@ public class Pedido {
 	}
 	private String getProductListXML() {
 		String sol = "";
+		sol += "<productos>";
 		for(int i = 0; i < productos.size(); i++) {
-			sol += productos.get(i).toString(cantidades.get(i)) + "\n";
+			sol += productos.get(i).toString(cantidades.get(i)) + "";
 		}
+		sol += "</productos>";
 		return sol;
 	}
 

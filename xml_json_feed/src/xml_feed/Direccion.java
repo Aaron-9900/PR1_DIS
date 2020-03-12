@@ -9,11 +9,11 @@ public class Direccion {
 	@Override
 	public String toString() {
 		return "<direccion>"
-				+ "\n\t<calle>"+ calle +"</calle>"
-				+ "\n\t<numero>"+numero+"</numero>"
-				+ "\n\t<codigoPostal>"+codigoPostal+"</codigoPostal>"
-				+ "\n\t<poblacion>"+poblacion+"</poblacion>"
-				+ "\n\t<pais>"+pais+"</pais>"
+				+ "<calle>"+ calle +"</calle>"
+				+ "<numero>"+numero+"</numero>"
+				+ "<codigoPostal>"+codigoPostal+"</codigoPostal>"
+				+ "<poblacion>"+poblacion+"</poblacion>"
+				+ "<pais>"+pais+"</pais>"
 				+"</direccion>";
 	}
 	public Direccion(String calle, Integer numero, Integer codigoPostal, String poblacion, String pais) {

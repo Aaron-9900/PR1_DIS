@@ -7,9 +7,9 @@ public class Localizacion {
 	@Override
 	public String toString() {
 		return "<localizacion>"
-				+ "\n\t<pasillo>"+ pasillo +"</pasillo>"
-				+ "\n\t<estanteria>"+estanteria+"</estanteria>"
-				+ "\n\t<estante>"+estante+"</estante>"
+				+ "<pasillo>"+ pasillo +"</pasillo>"
+				+ "<estanteria>"+estanteria+"</estanteria>"
+				+ "<estante>"+estante+"</estante>"
 				+"</localizacion>";
 	}
 	

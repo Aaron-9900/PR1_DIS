@@ -10,11 +10,11 @@ public class Cliente {
 	@Override
 	public String toString() {
 		return "<cliente>"
-				+ "\n\t<nombre>" + nombre +"</nombre>"
-				+ "\n\t<apellido>" + apellido +"</apellido>"
-				+ "\n\t<email>" + email +"</email>"
-				+ "\n\t<telefono>" + Telf +"</telefono>"
-				+ "\n\t" + direccion.toString()
+				+ "<nombre>" + nombre +"</nombre>"
+				+ "<apellido>" + apellido +"</apellido>"
+				+ "<email>" + email +"</email>"
+				+ "<telefono>" + Telf +"</telefono>"
+				+ "" + direccion.toString()
 				+"</cliente>";
 	}
 	public Cliente(String nombre, String apellido, String email, Integer Telf, Direccion direccion) {

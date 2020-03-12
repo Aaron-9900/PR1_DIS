@@ -10,21 +10,22 @@ public class Producto {
 	@Override
 	public String toString() {
 		return "<producto>"
-				+ "\n\t<codigo>"+ codigo +"</codigo>"
-				+ "\n\t<nombre>"+nombre+"</nombre>"
-				+ "\n\t<descripcion>"+descripcion+"</descripcion>"
-				+ "\n\t<stock>"+stock+"</stock>"
-				+ "\n\t<pendientes>"+pendientes+"</pendientes>"
-				+ "\n\t" + localizacion.toString()
+				+ "<codigo>"+ codigo +"</codigo>"
+				+ "<nombre>"+nombre+"</nombre>"
+				+ "<descripcion>"+descripcion+"</descripcion>"
+				+ "<stock>"+stock+"</stock>"
+				+ "<pendientes>"+pendientes+"</pendientes>"
+				+ "" + localizacion.toString()
 				+"</producto>";
 	}
 	public String toString(Integer cantidad) {
-		return "<producto" + " cantidad=\"" + cantidad + "\">"
-				+ "\n\t<codigo>"+ codigo +"</codigo>"
-				+ "\n\t<nombre>"+nombre+"</nombre>"
-				+ "\n\t<descripcion>"+descripcion+"</descripcion>"
-				+ "\n\t<stock>"+stock+"</stock>"
-				+ "\n\t<pendientes>"+pendientes+"</pendientes>"
+		return "<producto>"
+				+ "<codigo>"+ codigo +"</codigo>"
+				+ "<nombre>"+nombre+"</nombre>"
+				+ "<descripcion>"+descripcion+"</descripcion>"
+				+ "<stock>"+stock+"</stock>"
+				+ "<pendientes>"+pendientes+"</pendientes>"
+				+ "<cantidad>"+cantidad+"</cantidad>"
 				+"</producto>";
 	}
 	public Producto(Integer codigo, String nombre, String descripcion, Integer stock, Localizacion localizacion, Integer pendientes) {
