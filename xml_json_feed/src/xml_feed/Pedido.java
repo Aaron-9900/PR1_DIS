@@ -12,7 +12,7 @@ public class Pedido {
 		return "<pedido>"
 				+ "\n\t" + direccion.toString()
 				+ "\n\t<destinatario>" + destinatario +"</destinatario>"
-				+ "\n\t<pais>"+ productos + "</pais>"
+				+ "\n\t" + getProductListXML()
 				+"</pedido>";
 	}
 	public Pedido(ArrayList<Producto> productos, ArrayList<Integer> cantidades ,Direccion direccion, String destinatario) {
@@ -22,6 +22,13 @@ public class Pedido {
 		this.direccion = direccion;
 		this.destinatario = destinatario;
 		//TODO: Add date field (possibly with a library or with a class
+	}
+	private String getProductListXML() {
+		String sol = "";
+		for(int i = 0; i < productos.size(); i++) {
+			sol += productos.get(i).toString(cantidades.get(i)) + "\n";
+		}
+		return sol;
 	}
 
 	/**

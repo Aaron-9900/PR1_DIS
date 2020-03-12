@@ -17,6 +17,7 @@ public class Main {
 		System.out.println("1.- Enter data");
 		System.out.println("2.- Export to xml");
 		System.out.println("3.- Export to Json");
+		System.out.println("4.- Mocks");
 		System.out.println("0.- Quit");
 	}
 	
@@ -104,6 +105,26 @@ public class Main {
 						System.out.println(xmlJ);
 						
 						writeToFile(xmlJ, "JsonFile.xml");
+						break;
+					case 4:
+						Direccion direccion = new Direccion("Cerro del Espino", 9, 28221, "Madrid", "Espanya");
+						Localizacion localizacion1 = new Localizacion(10, "A", "AC");
+						Localizacion localizacion2 = new Localizacion(11, "D", "AP");
+						Producto producto1 = new Producto(213, "Alfombra fashion", "Alfombra del siglo XII", 12, localizacion1, 29);
+						Producto producto2 = new Producto(209, "TV 4K Samsung", "Television curva cara", 29, localizacion2, 10029);
+						ArrayList<Producto> productos = new ArrayList<Producto>();
+						productos.add(producto1);
+						productos.add(producto2);
+						ArrayList<Integer> numeroProductos = new ArrayList();
+						numeroProductos.add(3);
+						numeroProductos.add(1);
+						String destinatario = "Aaron Hoffman";
+						
+						Pedido pedido = new Pedido(productos, numeroProductos, direccion, destinatario);
+						String xm =pedido.toString();
+						System.out.println(xm);
+						
+						writeToFile(xm, "JsonFile.xml");
 						break;
 				}
 				System.out.println("Saliendo del programa");
