@@ -6,7 +6,16 @@ public class Direccion {
 	private Integer codigoPostal;
 	private String poblacion;
 	private String pais;
-
+	@Override
+	public String toString() {
+		return "<direccion>"
+				+ "\n\t<calle>"+ calle +"</calle>"
+				+ "\n\t<numero>"+numero+"</numero>"
+				+ "\n\t<codigoPostal>"+codigoPostal+"</codigoPostal>"
+				+ "\n\t<poblacion>"+poblacion+"</poblacion>"
+				+ "\n\t<pais>"+pais+"</pais>"
+				+"</direccion>";
+	}
 	public Direccion(String calle, Integer numero, Integer codigoPostal, String poblacion, String pais) {
 		this.calle = calle;
 		this.numero = numero;

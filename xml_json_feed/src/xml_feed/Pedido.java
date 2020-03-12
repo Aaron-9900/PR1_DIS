@@ -7,7 +7,10 @@ public class Pedido {
 	private ArrayList<Integer> cantidades;
 	private Direccion direccion;
 	private String destinatario;
-
+	@Override
+	public String toString() {
+		return "";
+	}
 	public Pedido(ArrayList<Producto> productos, ArrayList<Integer> cantidades ,Direccion direccion, String destinatario) {
 		super();
 		this.productos = productos;
