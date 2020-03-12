@@ -9,7 +9,11 @@ public class Pedido {
 	private String destinatario;
 	@Override
 	public String toString() {
-		return "";
+		return "<pedido>"
+				+ "\n\t" + direccion.toString()
+				+ "\n\t<destinatario>" + destinatario +"</destinatario>"
+				+ "\n\t<pais>"+ productos + "</pais>"
+				+"</pedido>";
 	}
 	public Pedido(ArrayList<Producto> productos, ArrayList<Integer> cantidades ,Direccion direccion, String destinatario) {
 		super();
