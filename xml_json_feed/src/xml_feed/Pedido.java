@@ -6,16 +6,16 @@ public class Pedido {
 	private ArrayList<Producto> productos;
 	private ArrayList<Integer> cantidades;
 	private Direccion direccion;
-	private String destinatario;
+	private Cliente destinatario;
 	@Override
 	public String toString() {
 		return "<pedido>"
 				+ "\n\t" + direccion.toString()
-				+ "\n\t<destinatario>" + destinatario +"</destinatario>"
+				+ "\n\t" + destinatario.toString()
 				+ "\n\t" + getProductListXML()
 				+"</pedido>";
 	}
-	public Pedido(ArrayList<Producto> productos, ArrayList<Integer> cantidades ,Direccion direccion, String destinatario) {
+	public Pedido(ArrayList<Producto> productos, ArrayList<Integer> cantidades ,Direccion direccion, Cliente destinatario) {
 		super();
 		this.productos = productos;
 		this.cantidades = cantidades;
@@ -34,14 +34,14 @@ public class Pedido {
 	/**
 	 * @return the destinatario
 	 */
-	public String getDestinatario() {
+	public Cliente getDestinatario() {
 		return destinatario;
 	}
 
 	/**
 	 * @param destinatario the destinatario to set
 	 */
-	public void setDestinatario(String destinatario) {
+	public void setDestinatario(Cliente destinatario) {
 		this.destinatario = destinatario;
 	}
 

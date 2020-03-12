@@ -19,7 +19,7 @@ public class Producto {
 				+"</producto>";
 	}
 	public String toString(Integer cantidad) {
-		return "<producto" + " cantidad=" + cantidad + ">"
+		return "<producto" + " cantidad=\"" + cantidad + "\">"
 				+ "\n\t<codigo>"+ codigo +"</codigo>"
 				+ "\n\t<nombre>"+nombre+"</nombre>"
 				+ "\n\t<descripcion>"+descripcion+"</descripcion>"

@@ -7,7 +7,16 @@ public class Cliente {
 	private String email;
 	private Integer Telf;
 	private Direccion direccion;
-	
+	@Override
+	public String toString() {
+		return "<cliente>"
+				+ "\n\t<nombre>" + nombre +"</nombre>"
+				+ "\n\t<apellido>" + apellido +"</apellido>"
+				+ "\n\t<email>" + email +"</email>"
+				+ "\n\t<telefono>" + Telf +"</telefono>"
+				+ "\n\t" + direccion.toString()
+				+"</cliente>";
+	}
 	public Cliente(String nombre, String apellido, String email, Integer Telf, Direccion direccion) {
 		
 		this.nombre = nombre;

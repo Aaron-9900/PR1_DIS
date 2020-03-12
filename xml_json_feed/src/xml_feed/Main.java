@@ -118,8 +118,7 @@ public class Main {
 						ArrayList<Integer> numeroProductos = new ArrayList();
 						numeroProductos.add(3);
 						numeroProductos.add(1);
-						String destinatario = "Aaron Hoffman";
-						
+						Cliente destinatario = new Cliente("Jose", "Gil", "jose@gmail.com", 661929292, direccion);
 						Pedido pedido = new Pedido(productos, numeroProductos, direccion, destinatario);
 						String xm =pedido.toString();
 						System.out.println(xm);
