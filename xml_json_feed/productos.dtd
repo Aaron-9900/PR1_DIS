@@ -1,0 +1,12 @@
+<!ELEMENT productos (producto)*>
+<!ELEMENT producto ( nombre,codigo,descripcion,stock,pendientes,localizacion)>
+<!ATTLIST producto cantidad CDATA   #IMPLIED>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT codigo (#PCDATA)>
+<!ELEMENT descripcion (#PCDATA)>
+<!ELEMENT stock (#PCDATA)>
+<!ELEMENT pendientes (#PCDATA)>
+<!ELEMENT localizacion (pasillo,estanteria,estante)>
+<!ELEMENT pasillo (#PCDATA)>
+<!ELEMENT estanteria (#PCDATA)>
+<!ELEMENT estante (#PCDATA)>

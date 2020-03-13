@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -35,3 +36,6 @@ bin/
 build/
 /bin1/
 java/build/**
+=======
+/.metadata/
+>>>>>>> develop
