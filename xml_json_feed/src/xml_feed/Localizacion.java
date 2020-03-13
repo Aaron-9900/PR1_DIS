@@ -19,6 +19,10 @@ public class Localizacion {
 		this.estante = estante;
 	}
 
+	public Localizacion() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @return the pasillo
 	 */

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<productos>
+    <producto>
+        <codigo>6</codigo>
+        <nombre>Alfombra fashion</nombre>
+        <descripcion>frwfewfe</descripcion>
+        <stock>4</stock>
+        <pendientes>341</pendientes>
+        <localizacion>
+            <pasillo>3</pasillo>
+            <estanteria>1</estanteria>
+            <estante>3</estante>
+        </localizacion>
+    </producto>
+</productos>

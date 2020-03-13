@@ -25,6 +25,9 @@ public class Cliente {
 		this.Telf = Telf;
 		this.direccion = direccion;
 	}
+	public Cliente() {
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * @return the nombre
 	 */
