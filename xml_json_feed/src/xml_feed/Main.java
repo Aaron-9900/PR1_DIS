@@ -1,4 +1,4 @@
-//He usado el codigo de ejmplo subido a moodle pero le he hecho un par de modificaciones 
+ //He usado el codigo de ejmplo subido a moodle pero le he hecho un par de modificaciones 
 //para que funcione, imprima solo cuando se halla generado el documento y que funcione con xml o Json
 package xml_feed;
 
@@ -11,6 +11,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -27,8 +28,18 @@ public class Main {
 	{
 		System.out.println("**************************");
 		System.out.println("1.- Enter data");
-		System.out.println("2.- Export to xml");
-		System.out.println("3.- Export to Json");
+		System.out.println("2.- Save to xml");
+		System.out.println("3.- Export to xml");
+		System.out.println("4.- validate to Xml");
+		System.out.println("0.- Quit");
+	}
+	
+	public static void generateMenuData() 
+	{
+		System.out.println("**************************");
+		System.out.println("1.- Enter data");
+		System.out.println("2.- Save to xml");
+		System.out.println("3.- validate to Xml");
 		System.out.println("4.- Mocks");
 		System.out.println("0.- Quit");
 	}
@@ -78,7 +89,6 @@ public class Main {
 	    try {
 			writer.write(txt);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			writer.close();
@@ -86,7 +96,7 @@ public class Main {
 	}
 	
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, Exception {
 			
 			ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
 			int menu = -1;
@@ -104,7 +114,8 @@ public class Main {
 						alumnos.add(alumno_leido);
 						break;
 					case 2:
-						String header = "<?xml version=\"1.0\" encoding=\"UTF-8\">\n";
+						String header = "<?xml version=\"1.0\" encoding=\"UTF-8\">\n<!DOCTYPE pedido SYSTEM  \"pedidos.dtd\"\r\n" + 
+								"";
 						String root = "<clase>\n";
 						String xml = "";
 						xml += header + root;
@@ -120,29 +131,8 @@ public class Main {
 						writeToFile(xml, "xmlFile.xml");
 						break;
 					case 3:
-						String headerJ = "{\n";
-						String clase = "\t\"clase\":[\n";
-						String xmlJ = "";
-						xmlJ += headerJ+clase ;
-						int i = 0;
-						for (Alumno a: alumnos) 
-						{
-							xmlJ += a.toJson();
-							i++;
-							if (i < alumnos.size())
-							{
-								xmlJ += ",\n";
-							}
-							
-						}
-						String closeclase = "\n\t\t]\n";
-						String close = "\n}";	
-						xmlJ += closeclase+close;
-						
-	
-						System.out.println(xmlJ);
-						
-						writeToFile(xmlJ, "JsonFile.xml");
+						System.out.println(XMLUtils.validateWithDTDUsingDOM("xmlFile.xml"));
+					    System.out.println(XMLUtils.validateWithDTDUsingSAX("xmlFile.xml"));
 						break;
 					case 4:
 						Direccion direccion = new Direccion("Cerro del Espino", 9, 28221, "Madrid", "Espanya");
