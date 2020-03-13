@@ -7,6 +7,7 @@ public class Producto {
 	private Integer stock;
 	private Localizacion localizacion;
 	private Integer pendientes;
+	private String cantidad;
 	@Override
 	public String toString() {
 		return "<producto>"
@@ -28,13 +29,14 @@ public class Producto {
 				+ "<cantidad>"+cantidad+"</cantidad>"
 				+"</producto>";
 	}
-	public Producto(Integer codigo, String nombre, String descripcion, Integer stock, Localizacion localizacion, Integer pendientes) {
+	public Producto(Integer codigo, String nombre, String descripcion, Integer stock, Localizacion localizacion, Integer pendientes,String cantidad) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.stock = stock;
 		this.localizacion = localizacion;
 		this.pendientes = pendientes;
+		this.cantidad = cantidad;
 	}
 	public Producto() {
 		
@@ -121,5 +123,11 @@ public class Producto {
 	 */
 	public void setPendientes(Integer pendientes) {
 		this.pendientes = pendientes;
+	}
+	public String getCantidad() {
+		return cantidad;
+	}
+	public void setCantidad(String cantidad) {
+		this.cantidad = cantidad;
 	}
 }

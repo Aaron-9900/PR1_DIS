@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <productos>
     <producto>
-        <codigo>6</codigo>
-        <nombre>Alfombra fashion</nombre>
-        <descripcion>frwfewfe</descripcion>
-        <stock>4</stock>
-        <pendientes>341</pendientes>
+        <codigo>1</codigo>
+        <nombre>1</nombre>
+        <descripcion>1</descripcion>
+        <stock>1</stock>
+        <pendientes>1</pendientes>
         <localizacion>
-            <pasillo>3</pasillo>
+            <pasillo>1</pasillo>
             <estanteria>1</estanteria>
-            <estante>3</estante>
+            <estante>1</estante>
         </localizacion>
     </producto>
 </productos>
