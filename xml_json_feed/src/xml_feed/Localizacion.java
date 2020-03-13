@@ -4,6 +4,14 @@ public class Localizacion {
 	private Integer pasillo;
 	private Integer estanteria;
 	private Integer estante;
+	@Override
+	public String toString() {
+		return "<localizacion>"
+				+ "<pasillo>"+ pasillo +"</pasillo>"
+				+ "<estanteria>"+estanteria+"</estanteria>"
+				+ "<estante>"+estante+"</estante>"
+				+"</localizacion>";
+	}
 	
 	public Localizacion(Integer pasillo, Integer estanteria, Integer estante) {
 		this.pasillo = pasillo;

@@ -6,9 +6,16 @@ public class Pedido {
 	private ArrayList<Producto> productos;
 	private ArrayList<Integer> cantidades;
 	private Direccion direccion;
-	private String destinatario;
-
-	public Pedido(ArrayList<Producto> productos, ArrayList<Integer> cantidades ,Direccion direccion, String destinatario) {
+	private Cliente destinatario;
+	@Override
+	public String toString() {
+		return "<pedido>"
+				+ "" + direccion.toString()
+				+ "" + destinatario.toString()
+				+ "" + getProductListXML()
+				+"</pedido>";
+	}
+	public Pedido(ArrayList<Producto> productos, ArrayList<Integer> cantidades ,Direccion direccion, Cliente destinatario) {
 		super();
 		this.productos = productos;
 		this.cantidades = cantidades;
@@ -16,18 +23,27 @@ public class Pedido {
 		this.destinatario = destinatario;
 		//TODO: Add date field (possibly with a library or with a class
 	}
+	private String getProductListXML() {
+		String sol = "";
+		sol += "<productos>";
+		for(int i = 0; i < productos.size(); i++) {
+			sol += productos.get(i).toString(cantidades.get(i)) + "";
+		}
+		sol += "</productos>";
+		return sol;
+	}
 
 	/**
 	 * @return the destinatario
 	 */
-	public String getDestinatario() {
+	public Cliente getDestinatario() {
 		return destinatario;
 	}
 
 	/**
 	 * @param destinatario the destinatario to set
 	 */
-	public void setDestinatario(String destinatario) {
+	public void setDestinatario(Cliente destinatario) {
 		this.destinatario = destinatario;
 	}
 

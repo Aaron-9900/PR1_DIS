@@ -1,22 +1,40 @@
 package xml_feed;
 
-import java.util.ArrayList;
-
 public class Producto {
 	private Integer codigo;
 	private String nombre;
 	private String descripcion;
 	private Integer stock;
 	private Localizacion localizacion;
-	private String pendiente;
-
-	public Producto(Integer codigo, String nombre, String descripcion, Integer stock, Localizacion localizacion, String pendiente) {
+	private Integer pendientes;
+	@Override
+	public String toString() {
+		return "<producto>"
+				+ "<codigo>"+ codigo +"</codigo>"
+				+ "<nombre>"+nombre+"</nombre>"
+				+ "<descripcion>"+descripcion+"</descripcion>"
+				+ "<stock>"+stock+"</stock>"
+				+ "<pendientes>"+pendientes+"</pendientes>"
+				+ "" + localizacion.toString()
+				+"</producto>";
+	}
+	public String toString(Integer cantidad) {
+		return "<producto>"
+				+ "<codigo>"+ codigo +"</codigo>"
+				+ "<nombre>"+nombre+"</nombre>"
+				+ "<descripcion>"+descripcion+"</descripcion>"
+				+ "<stock>"+stock+"</stock>"
+				+ "<pendientes>"+pendientes+"</pendientes>"
+				+ "<cantidad>"+cantidad+"</cantidad>"
+				+"</producto>";
+	}
+	public Producto(Integer codigo, String nombre, String descripcion, Integer stock, Localizacion localizacion, Integer pendientes) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.stock = stock;
 		this.localizacion = localizacion;
-		this.pendiente = pendiente;
+		this.pendientes = pendientes;
 	}
 
 	/**
@@ -90,17 +108,16 @@ public class Producto {
 	}
 
 	/**
-	 * @return the pendiente
+	 * @return the pendientes
 	 */
-	public String getPendiente() {
-		return pendiente;
+	public Integer getPendientes() {
+		return pendientes;
 	}
 
 	/**
-	 * @param pendiente the pendiente to set
+	 * @param pendientes the pendientes to set
 	 */
-	public void setPendiente(String pendiente) {
-		this.pendiente = pendiente;
-	}	
-	
+	public void setPendientes(Integer pendientes) {
+		this.pendientes = pendientes;
+	}
 }
