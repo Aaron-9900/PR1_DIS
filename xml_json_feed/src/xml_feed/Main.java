@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -286,7 +288,20 @@ public class Main {
 
 		    StreamResult result = new StreamResult(fichero);
 		    transformer.transform(source, result);
-
+		    
+		    String inputi = "";
+		    try {
+		    	inputi = new String(Files.readAllBytes(Paths.get("productos.xml")));
+		    	if(!inputi.contains("<!DOCTYPE"))
+    			{
+		    	 	
+		    	 	inputi = inputi.replace("?>", "?><!DOCTYPE productos SYSTEM \"productos.dtd\">");
+		    	 	System.out.println(input);
+				    writeToFile(inputi,fichero);
+    			}
+		    	} catch (IOException e) { 
+		    		e.printStackTrace();
+		    	}
 			
 		} catch(Exception a) {
 			a.printStackTrace();
@@ -331,9 +346,11 @@ public class Main {
 			Integer estante = Integer.parseInt(in.readLine());
 			System.out.println("Pendientes:");
 			Integer pendientes = Integer.parseInt(in.readLine());
+			System.out.println("Producto:");
+			String cantidad = in.readLine();
 			
 			Localizacion localizacion = new Localizacion(pasillo, estanteria, estante);
-			Producto producto = new Producto(codigo, nombre, descripcion, stock, localizacion, pendientes);
+			Producto producto = new Producto(codigo, nombre, descripcion, stock, localizacion, pendientes,cantidad);
 			
 			listaProductos.add(producto);
 			
@@ -365,6 +382,19 @@ public class Main {
 		    StreamResult result = new StreamResult(fichero);
 		    transformer.transform(source, result);
 			
+		    String inputp = "";
+		    try { 
+		    	 	inputp = new String(Files.readAllBytes(Paths.get("pedidos.xml")));
+		    	 	
+		    	 	if(!inputp.contains("<!DOCTYPE"))
+	    			{
+		    	 		inputp = inputp.replace("?>", "?><!DOCTYPE productos SYSTEM \"productos.dtd\">");
+			    	 	System.out.println(input);
+					    writeToFile(inputp,fichero);
+	    			}
+		    	} catch (IOException e) { 
+		    		e.printStackTrace();
+		    	}
 		} catch(Exception a) {
 			productosXML = formatXML(productosXML);
 			writeToFile(productosXML, fichero);
@@ -380,7 +410,7 @@ public class Main {
         nombre.appendChild(document.createTextNode(productoActual.getNombre()));
         pr.appendChild(nombre);
         
-        Element codigo = document.createElement("nombre");
+        Element codigo = document.createElement("codigo");
         codigo.appendChild(document.createTextNode(productoActual.getCodigo().toString()));
         pr.appendChild(codigo);
         
@@ -408,11 +438,11 @@ public class Main {
         loc.appendChild(pasillo);
         
         Element estanteria = document.createElement("estanteria");
-        pasillo.appendChild(document.createTextNode(localizacion.getEstanteria().toString()));
+        estanteria.appendChild(document.createTextNode(localizacion.getEstanteria().toString()));
         loc.appendChild(estanteria);
         
-        Element estante = document.createElement("pasillo");
-        pasillo.appendChild(document.createTextNode(localizacion.getEstante().toString()));
+        Element estante = document.createElement("estante");
+        estante.appendChild(document.createTextNode(localizacion.getEstante().toString()));
         loc.appendChild(estante);
         
         return loc;
@@ -568,15 +598,16 @@ public class Main {
 						introducirClientes("clientes.xml");
 						break;
 					case 3:
-						System.out.println(XMLUtils.validateWithDTDUsingDOM("xmlFile.xml"));
-					    System.out.println(XMLUtils.validateWithDTDUsingSAX("xmlFile.xml"));
+						System.out.println("Productos :"+ XMLUtils.validateWithDTDUsingDOM("productos.xml"));
+						System.out.println("Pedios :");
+						System.out.println( XMLUtils.validateWithDTDUsingDOM("pedidos.xml"));
 						break;
 					case 4:
 						Direccion direccion = new Direccion("Cerro del Espino", 9, 28221, "Madrid", "Espanya");
 						Localizacion localizacion1 = new Localizacion(10, 1, 2);
 						Localizacion localizacion2 = new Localizacion(11, 4, 2);
-						Producto producto1 = new Producto(213, "Alfombra fashion", "Alfombra del siglo XII", 12, localizacion1, 29);
-						Producto producto2 = new Producto(209, "TV 4K Samsung", "Television curva cara", 29, localizacion2, 10029);
+						Producto producto1 = new Producto(213, "Alfombra fashion", "Alfombra del siglo XII", 12, localizacion1, 29,"1");
+						Producto producto2 = new Producto(209, "TV 4K Samsung", "Television curva cara", 29, localizacion2, 10029,"1");
 						ArrayList<Producto> productos = new ArrayList<Producto>();
 						productos.add(producto1);
 						productos.add(producto2);
@@ -589,15 +620,29 @@ public class Main {
 						try {
 					        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 					        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-							Document document = documentBuilder.parse("xmlFile.xml");
+							Document document = documentBuilder.parse("pedidos.xml");
 							Element root = document.getDocumentElement();
 							Element xm = pedidoToXML(pedido, document);	
 							root.appendChild(xm);
 						    TransformerFactory transformerFactory = TransformerFactory.newInstance();
 						    Transformer transformer = transformerFactory.newTransformer();
 						    DOMSource source = new DOMSource(document);
-						    StreamResult result = new StreamResult("xmlFile.xml");	
+						    StreamResult result = new StreamResult("pedidos.xml");	
 						    transformer.transform(source, result);
+						    
+						    String input = "";
+						    try { 
+						    	 	input = new String(Files.readAllBytes(Paths.get("pedidos.xml")));
+							    	if(!input.contains("<!DOCTYPE"))
+					    			{
+							    		input = input.replace("?>", "?> <!DOCTYPE pedidos SYSTEM \"pedidos.dtd\">");
+							    	 	System.out.println(input);
+									    writeToFile(input, "pedidos.xml");
+					    			}
+						    	 	
+						    	} catch (IOException e) { 
+						    		e.printStackTrace();
+						    	}				    
 
 						} catch(Exception e) {
 						}
