@@ -38,6 +38,7 @@ public class Main {
 	{
 		System.out.println("**************************");
 		System.out.println("1.- Introducir productos en fichero");
+		System.out.println("2.- Introducir clientes en fichero");
 		System.out.println("2.- Leer xml");
 		System.out.println("3.- validate to Xml");
 		System.out.println("4.- Mocks");
@@ -52,6 +53,81 @@ public class Main {
 		System.out.println("3.- validate to Xml");
 		System.out.println("4.- Mocks");
 		System.out.println("0.- Quit");
+	}
+	public static ArrayList<Cliente> introducirClientes() throws IOException {
+		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
+		int input = 0;
+		int iter = 0;
+		do {
+			if(iter == 0) {
+				System.out.println("Ahora está introducciendo un cliente.");
+			}
+			System.out.println("Nombre:");
+			String nombre = in.readLine();
+			
+			System.out.println("Apellido:");
+			String apellido = in.readLine();
+			
+			System.out.println("Email:");
+			String email = in.readLine();
+			
+			System.out.println("Telefono:");
+			Integer telf = Integer.parseInt(in.readLine());
+			
+			System.out.println("Calle:");
+			String calle = in.readLine();
+			
+			System.out.println("Codigo Postal:");
+			Integer cp = Integer.parseInt(in.readLine());
+			
+			System.out.println("Numero:");
+			Integer numero = Integer.parseInt(in.readLine());
+			
+			System.out.println("Poblacion:");
+			String poblacion = in.readLine();
+			
+			System.out.println("Pais:");
+			String pais = in.readLine();
+			
+			
+			Direccion dir = new Direccion(calle, cp, numero, poblacion, pais);
+			Cliente cli = new Cliente(nombre, apellido, email, telf, dir);
+			
+			listaClientes.add(cli);
+			
+			System.out.println("¿Desea introducir otro producto?");
+			System.out.println("1- Si");
+			System.out.println("2- No");
+			input = Integer.parseInt(in.readLine());
+			
+			
+		}while(input != 2);
+		try {
+	        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+	        Document document = documentBuilder.parse("clientes.xml");
+	        Element root = document.getDocumentElement();
+	        
+	        
+			for(int i = 0; i < listaClientes.size(); i++) {
+				Cliente clienteActual = listaClientes.get(i);
+				Element prod = clienteToXML(clienteActual, document);
+	            root.appendChild(prod);
+			}
+			
+		    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		    Transformer transformer = transformerFactory.newTransformer();
+		    DOMSource source = new DOMSource(document);
+
+		    StreamResult result = new StreamResult("productos.xml");
+		    transformer.transform(source, result);
+			
+		} catch(Exception a) {
+			
+		}
+		
+		return listaClientes;
 	}
 	
 	public static ArrayList<Producto> introducirProductos() throws IOException 
@@ -314,24 +390,7 @@ public class Main {
 						introducirProductos();
 						break;
 					case 2:
-						/*
-							String header = "<?xml version=\"1.0\" encoding=\"UTF-8\">\n<!DOCTYPE pedido SYSTEM  \"pedidos.dtd\"\r\n" + 
-									"";
-							String root = "<clase>\n";
-							String xml = "";
-							xml += header + root;
-							for (Alumno a: alumnos) 
-							{
-								xml += a.toXml();
-							}
-							String close_root = "</clase>";
-				
-							xml += close_root;
-		
-							System.out.println(xml);
-							writeToFile(xml, "xmlFile.xml");
-						*/
-						readXML("productos.xml");
+						introducirClientes();
 						break;
 					case 3:
 						System.out.println(XMLUtils.validateWithDTDUsingDOM("xmlFile.xml"));
@@ -352,14 +411,21 @@ public class Main {
 						Cliente destinatario = new Cliente("Jose", "Gil", "jose@gmail.com", 661929292, direccion);
 						Pedido pedido = new Pedido(productos, numeroProductos, direccion, destinatario);
 						Pedido pedido2 = new Pedido(productos, numeroProductos, direccion, destinatario);
+						try {
+					        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+					        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+							Document document = documentBuilder.parse("xmlFile.xml");
+							Element root = document.getDocumentElement();
+							Element xm = pedidoToXML(pedido, document);	
+							root.appendChild(xm);
+						    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+						    Transformer transformer = transformerFactory.newTransformer();
+						    DOMSource source = new DOMSource(document);
+						    StreamResult result = new StreamResult("xmlFile.xml");	
+						    transformer.transform(source, result);
 
-						String xm = "<root>" 
-									+ pedido.toString()
-									+ "</root>";
-						xm = formatXML(xm);
-						System.out.println(xm);
-						
-						writeToFile(xm, "xmlFile.xml");
+						} catch(Exception e) {
+						}
 						break;
 				}
 				System.out.println("Saliendo del programa");

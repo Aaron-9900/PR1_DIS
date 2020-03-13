@@ -1,26 +1,2 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><productos>
-    <producto>
-        <codigo>4829429</codigo>
-        <nombre>Alfombra</nombre>
-        <descripcion>Es muy misteriosa. Si la tocas, se mueve...</descripcion>
-        <stock>76</stock>
-        <pendientes>100</pendientes>
-        <localizacion>
-            <pasillo>2</pasillo>
-            <estanteria>1</estanteria>
-            <estante>34</estante>
-        </localizacion>
-    </producto>
-    <producto>
-        <codigo>5289</codigo>
-        <nombre>Mesa</nombre>
-        <descripcion>Especial</descripcion>
-        <stock>48</stock>
-        <pendientes>1312</pendientes>
-        <localizacion>
-            <pasillo>1</pasillo>
-            <estanteria>5</estanteria>
-            <estante>8</estante>
-        </localizacion>
-    </producto>
-<producto><nombre>P</nombre><nombre>52</nombre><descripcion>fafdaf</descripcion><stock>4</stock><pendientes>56334</pendientes><localizacion><pasillo>222</pasillo><estanteria/><pasillo/></localizacion></producto></productos>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><clientes>
+<cliente><nombre>Aaron</nombre><apellido>Hoffman</apellido><email>aafdsaf</email><telefono>421341</telefono><direccion><calle>fwfrwe</calle><codigoPostal>532532</codigoPostal><numero>4235</numero><poblacion>fgte</poblacion><pais>gegreg</pais></direccion></cliente></clientes>
