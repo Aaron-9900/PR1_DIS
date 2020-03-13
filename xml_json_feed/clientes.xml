@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><clientes>
-<cliente><nombre>Aaron</nombre><apellido>Hoffman</apellido><email>fwfewfe</email><telefono>23414241</telefono><direccion><calle>fegwfwrfw</calle><codigoPostal>43254352</codigoPostal><numero>432523</numero><poblacion>gegtwe</poblacion><pais>getger</pais></direccion></cliente></clientes>
+<cliente><nombre>Aaron</nombre>
+<apellido>Hoffman</apellido>
+<email>fwfewfe</email>
+<telefono>23414241</telefono>
+<direccion><calle>fegwfwrfw</calle>
+<codigoPostal>43254352</codigoPostal>
+<numero>432523</numero><poblacion>gegtwe</poblacion>
+<pais>getger</pais></direccion></cliente></clientes>

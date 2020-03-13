@@ -1,2 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><pedidos>
-</pedidos>
+<pedido>
+<productos><producto><nombre>Alfombra fashion</nombre><nombre>6</nombre><descripcion>frwfewfe</descripcion><stock>4</stock><pendientes>341</pendientes><localizacion><pasillo>313</pasillo><estanteria/><pasillo/></localizacion></producto></productos><cliente><nombre>Aaron</nombre><apellido>Hoffman</apellido><email>fwfewfe</email><telefono>23414241</telefono><direccion><calle>fegwfwrfw</calle><codigoPostal>43254352</codigoPostal><numero>432523</numero><poblacion>gegtwe</poblacion><pais>getger</pais></direccion></cliente><direccion><calle>frewfe</calle><codigoPostal>4341</codigoPostal><numero>424</numero><poblacion>frfw</poblacion><pais>frefe</pais></direccion></pedido></pedidos>

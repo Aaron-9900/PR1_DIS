@@ -54,7 +54,7 @@ public class Main {
 		System.out.println("4.- Mocks");
 		System.out.println("0.- Quit");
 	}
-	public static ArrayList<Cliente> introducirClientes() throws IOException {
+	public static ArrayList<Cliente> introducirClientes(String fichero) throws IOException {
 		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
 		int input = 0;
@@ -106,7 +106,7 @@ public class Main {
 		try {
 	        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 	        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-	        Document document = documentBuilder.parse("clientes.xml");
+	        Document document = documentBuilder.parse(fichero);
 	        Element root = document.getDocumentElement();
 	        
 	        
@@ -120,7 +120,7 @@ public class Main {
 		    Transformer transformer = transformerFactory.newTransformer();
 		    DOMSource source = new DOMSource(document);
 
-		    StreamResult result = new StreamResult("clientes.xml");
+		    StreamResult result = new StreamResult(fichero);
 		    transformer.transform(source, result);
 			
 		} catch(Exception a) {
@@ -129,7 +129,7 @@ public class Main {
 		
 		return listaClientes;
 	}
-	public static ArrayList<Pedido> agregarPedido() throws IOException, ParserConfigurationException, SAXException {
+	public static ArrayList<Pedido> agregarPedido(String fichero) throws IOException, ParserConfigurationException, SAXException {
 		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
 		ArrayList<Integer> cantidadProductos = new ArrayList<Integer>();
@@ -167,7 +167,8 @@ public class Main {
 						if(elemento.getElementsByTagName("codigo").item(0).getTextContent().equals(cod)) {
 							prod.setCodigo(Integer.parseInt(elemento.getElementsByTagName("codigo").item(0).getTextContent()));
 							prod.setDescripcion(elemento.getElementsByTagName("descripcion").item(0).getTextContent());
-							prod.setPendientes(Integer.parseInt(elemento.getElementsByTagName("codigo").item(0).getTextContent()));
+							prod.setNombre(elemento.getElementsByTagName("nombre").item(0).getTextContent());
+							prod.setPendientes(Integer.parseInt(elemento.getElementsByTagName("pendientes").item(0).getTextContent()));
 							prod.setStock(Integer.parseInt(elemento.getElementsByTagName("stock").item(0).getTextContent()));
 							
 							Node nodoLoc = elemento.getElementsByTagName("localizacion").item(0);
@@ -198,27 +199,28 @@ public class Main {
 				cantidadProductos.add(cantidadPedidos);
 				
 				System.out.println("Quiere anyadir otro producto? \n0.- No\n 1.- Si");
+				otroPedido = Integer.parseInt(in.readLine());
 				i = 0;
 
 			} while(otroPedido != 0);
 			
 			i = 0;
-			System.out.println("Nombre de cliente:");
-			String nom = in.readLine();
 			Cliente cli = new Cliente();
 
 			while(i != -1) {
 				System.out.println("Nombre de cliente:");
+				String nom = in.readLine();
 				for(i = 0; i < listaClientes.getLength(); i++) {
 					Node nodo = listaClientes.item(i);
 					
 					Element elemento = (Element) nodo;
 					
-					if(elemento.getElementsByTagName("nombre").item(0).getTextContent() == nom) {
+					if(elemento.getElementsByTagName("nombre").item(0).getTextContent().equals(nom)) {
 						cli.setTelf(Integer.parseInt(elemento.getElementsByTagName("telefono").item(0).getTextContent()));
 						cli.setNombre(elemento.getElementsByTagName("nombre").item(0).getTextContent());
 						cli.setApellido(elemento.getElementsByTagName("apellido").item(0).getTextContent());
-												
+						cli.setEmail(elemento.getElementsByTagName("email").item(0).getTextContent());
+					
 						Node nodoDir = elemento.getElementsByTagName("direccion").item(0);
 						Element elementoDir = (Element) nodoDir;
 						
@@ -229,6 +231,9 @@ public class Main {
 						break;
 						
 					}	
+				}
+				if(i == -1) {
+					break;
 				}
 				System.out.println("Nombre de cliente incorrecto. Introduzca otro por favor.");
 
@@ -265,7 +270,7 @@ public class Main {
 		try {
 	        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 	        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-	        Document document = documentBuilder.parse("clientes.xml");
+	        Document document = documentBuilder.parse(fichero);
 	        Element root = document.getDocumentElement();
 	        
 	        
@@ -279,11 +284,12 @@ public class Main {
 		    Transformer transformer = transformerFactory.newTransformer();
 		    DOMSource source = new DOMSource(document);
 
-		    StreamResult result = new StreamResult("clientes.xml");
+		    StreamResult result = new StreamResult(fichero);
 		    transformer.transform(source, result);
+
 			
 		} catch(Exception a) {
-			
+			a.printStackTrace();
 		}
 		
 		return listaPedidos;
@@ -299,7 +305,7 @@ public class Main {
 		
 		return direccion;
 	}
-	public static ArrayList<Producto> introducirProductos() throws IOException 
+	public static ArrayList<Producto> introducirProductos(String fichero) throws IOException 
 	{
 		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		ArrayList<Producto> listaProductos = new ArrayList<Producto>();
@@ -356,12 +362,12 @@ public class Main {
 		    Transformer transformer = transformerFactory.newTransformer();
 		    DOMSource source = new DOMSource(document);
 
-		    StreamResult result = new StreamResult("productos.xml");
+		    StreamResult result = new StreamResult(fichero);
 		    transformer.transform(source, result);
 			
 		} catch(Exception a) {
 			productosXML = formatXML(productosXML);
-			writeToFile(productosXML, "productos.xml");
+			writeToFile(productosXML, fichero);
 			
 		}
 		
@@ -556,10 +562,10 @@ public class Main {
 				{
 					case 1:
 						// Pedido pedido = showSubmenu();
-						introducirProductos();
+						introducirProductos("productos.xml");
 						break;
 					case 2:
-						introducirClientes();
+						introducirClientes("clientes.xml");
 						break;
 					case 3:
 						System.out.println(XMLUtils.validateWithDTDUsingDOM("xmlFile.xml"));
@@ -597,7 +603,7 @@ public class Main {
 						}
 						break;
 					case 5:
-						agregarPedido();
+						agregarPedido("pedidos.xml");
 						break;
 				}
 				
