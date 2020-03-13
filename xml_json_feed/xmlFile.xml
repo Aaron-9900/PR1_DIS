@@ -1,13 +1,43 @@
-<?xml version="1.0" encoding="UTF-8">
-<!DOCTYPE clase [
-<!ELEMENT clase (alumn*)>
-<!ELEMENT alumn (name,surname)>
-<!ELEMENT name (#PCDATA)>
-<!ELEMENT surname (#PCDATA)>
-]>
-<clase>
-<alumn>
-<name>1</name>
-<surname>1</surname>
-</alumn>
-</clase>
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <pedido>
+        <direccion>
+            <calle>Cerro del Espino</calle>
+            <numero>9</numero>
+            <codigoPostal>28221</codigoPostal>
+            <poblacion>Madrid</poblacion>
+            <pais>Espanya</pais>
+        </direccion>
+        <cliente>
+            <nombre>Jose</nombre>
+            <apellido>Gil</apellido>
+            <email>jose@gmail.com</email>
+            <telefono>661929292</telefono>
+            <direccion>
+                <calle>Cerro del Espino</calle>
+                <numero>9</numero>
+                <codigoPostal>28221</codigoPostal>
+                <poblacion>Madrid</poblacion>
+                <pais>Espanya</pais>
+            </direccion>
+        </cliente>
+        <productos>
+            <producto>
+                <codigo>213</codigo>
+                <nombre>Alfombra fashion</nombre>
+                <descripcion>Alfombra del siglo XII</descripcion>
+                <stock>12</stock>
+                <pendientes>29</pendientes>
+                <cantidad>3</cantidad>
+            </producto>
+            <producto>
+                <codigo>209</codigo>
+                <nombre>TV 4K Samsung</nombre>
+                <descripcion>Television curva cara</descripcion>
+                <stock>29</stock>
+                <pendientes>10029</pendientes>
+                <cantidad>1</cantidad>
+            </producto>
+        </productos>
+    </pedido>
+</root>

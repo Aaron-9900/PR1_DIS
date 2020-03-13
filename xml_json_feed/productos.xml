@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<productos>
+    <producto>
+        <codigo>4829429</codigo>
+        <nombre>Alfombra</nombre>
+        <descripcion>Es muy misteriosa. Si la tocas, se mueve...</descripcion>
+        <stock>76</stock>
+        <pendientes>100</pendientes>
+        <localizacion>
+            <pasillo>2</pasillo>
+            <estanteria>1</estanteria>
+            <estante>34</estante>
+        </localizacion>
+    </producto>
+    <producto>
+        <codigo>5289</codigo>
+        <nombre>Mesa</nombre>
+        <descripcion>Especial</descripcion>
+        <stock>48</stock>
+        <pendientes>1312</pendientes>
+        <localizacion>
+            <pasillo>1</pasillo>
+            <estanteria>5</estanteria>
+            <estante>8</estante>
+        </localizacion>
+    </producto>
+</productos>
