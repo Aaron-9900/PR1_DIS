@@ -94,10 +94,148 @@ public class Main {
 			
 		}while(input != 2);
 		String productosXML = getProductListXML(listaProductos);
-		productosXML = formatXML(productosXML);
-		writeToFile(productosXML, "productos.xml");
+		try {
+	        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+	        Document document = documentBuilder.parse("productos.xml");
+	        Element root = document.getDocumentElement();
+	        
+	        
+			for(int i = 0; i < listaProductos.size(); i++) {
+				Producto productoActual = listaProductos.get(i);
+				Element prod = productoToXML(productoActual, document);
+	            root.appendChild(prod);
+			}
+			
+		    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		    Transformer transformer = transformerFactory.newTransformer();
+		    DOMSource source = new DOMSource(document);
+
+		    StreamResult result = new StreamResult("productos.xml");
+		    transformer.transform(source, result);
+			
+		} catch(Exception a) {
+			productosXML = formatXML(productosXML);
+			writeToFile(productosXML, "productos.xml");
+			
+		}
+		
 		return listaProductos;
 	}
+	private static Element productoToXML(Producto productoActual, Document document) {
+		Element pr = document.createElement("producto");
+		
+        Element nombre = document.createElement("nombre");
+        nombre.appendChild(document.createTextNode(productoActual.getNombre()));
+        pr.appendChild(nombre);
+        
+        Element codigo = document.createElement("nombre");
+        codigo.appendChild(document.createTextNode(productoActual.getCodigo().toString()));
+        pr.appendChild(codigo);
+        
+        Element descripcion = document.createElement("descripcion");
+        descripcion.appendChild(document.createTextNode(productoActual.getDescripcion()));
+        pr.appendChild(descripcion);
+        
+        Element stock = document.createElement("stock");
+        stock.appendChild(document.createTextNode(productoActual.getStock().toString()));
+        pr.appendChild(stock);
+        
+        Element pendientes = document.createElement("pendientes");
+        pendientes.appendChild(document.createTextNode(productoActual.getPendientes().toString()));
+        pr.appendChild(pendientes);
+        
+        pr.appendChild(localizacionToXML(productoActual.getLocalizacion(), document));
+        
+        return pr;
+	}
+	private static Element localizacionToXML(Localizacion localizacion, Document document) {
+		Element loc = document.createElement("localizacion");
+		
+        Element pasillo = document.createElement("pasillo");
+        pasillo.appendChild(document.createTextNode(localizacion.getPasillo().toString()));
+        loc.appendChild(pasillo);
+        
+        Element estanteria = document.createElement("estanteria");
+        pasillo.appendChild(document.createTextNode(localizacion.getEstanteria().toString()));
+        loc.appendChild(estanteria);
+        
+        Element estante = document.createElement("pasillo");
+        pasillo.appendChild(document.createTextNode(localizacion.getEstante().toString()));
+        loc.appendChild(estante);
+        
+        return loc;
+        
+	}
+	private static Element clienteToXML(Cliente cliente,Document document) {
+		
+		Element cl = document.createElement("cliente");
+		
+        Element nombre = document.createElement("nombre");
+        nombre.appendChild(document.createTextNode(cliente.getNombre()));
+        cl.appendChild(nombre);
+        
+        Element apellido = document.createElement("apellido");
+        apellido.appendChild(document.createTextNode(cliente.getApellido()));
+        cl.appendChild(apellido);
+        
+        Element email = document.createElement("email");
+        email.appendChild(document.createTextNode(cliente.getEmail()));
+        cl.appendChild(email);
+        
+        Element telefono = document.createElement("telefono");
+        telefono.appendChild(document.createTextNode(cliente.getTelf().toString()));
+        cl.appendChild(telefono);
+        
+        
+       cl.appendChild(direccionToXML(cliente.getDireccion(), document));
+       return cl;
+		
+	}
+	
+	private static Element pedidoToXML(Pedido pedido, Document document) {
+		Element pd = document.createElement("pedido");
+		Element productos = document.createElement("productos");
+		ArrayList<Producto> listaProductos = pedido.getProductos();
+		for(int i = 0; i < listaProductos.size(); i++) {
+			Producto productoActual = listaProductos.get(i);
+			Element prod = productoToXML(productoActual, document);
+            productos.appendChild(prod);
+		}
+		pd.appendChild(productos);
+		pd.appendChild(clienteToXML(pedido.getDestinatario(), document));
+		pd.appendChild(direccionToXML(pedido.getDireccion(), document));
+		
+		return pd;
+		
+	}
+	private static Element direccionToXML(Direccion direccion, Document document) {
+		Element dir = document.createElement("direccion");
+		
+		Element calle = document.createElement("calle");
+		calle.appendChild(document.createTextNode(direccion.getCalle()));
+        dir.appendChild(calle);
+        
+		Element codigoPostal = document.createElement("codigoPostal");
+		codigoPostal.appendChild(document.createTextNode(direccion.getCodigoPostal().toString()));
+        dir.appendChild(codigoPostal);
+		
+        Element numero = document.createElement("numero");
+        numero.appendChild(document.createTextNode(direccion.getNumero().toString()));
+        dir.appendChild(numero);
+        
+        Element poblacion = document.createElement("poblacion");
+        poblacion.appendChild(document.createTextNode(direccion.getPoblacion()));
+        dir.appendChild(poblacion);
+        
+        Element pais = document.createElement("pais");
+        pais.appendChild(document.createTextNode(direccion.getPais()));
+        dir.appendChild(pais);
+        
+        return dir;
+        
+	}
+	
 	private static String getProductListXML(ArrayList <Producto>productos) {
 		String sol = "";
 		sol += "<productos>";

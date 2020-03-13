@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<productos>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><productos>
     <producto>
         <codigo>4829429</codigo>
         <nombre>Alfombra</nombre>
@@ -24,4 +23,4 @@
             <estante>8</estante>
         </localizacion>
     </producto>
-</productos>
+<producto><nombre>P</nombre><nombre>52</nombre><descripcion>fafdaf</descripcion><stock>4</stock><pendientes>56334</pendientes><localizacion><pasillo>222</pasillo><estanteria/><pasillo/></localizacion></producto></productos>
