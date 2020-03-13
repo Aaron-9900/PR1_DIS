@@ -1,2 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><clientes>
-<cliente><nombre>Aaron</nombre><apellido>Hoffman</apellido><email>aafdsaf</email><telefono>421341</telefono><direccion><calle>fwfrwe</calle><codigoPostal>532532</codigoPostal><numero>4235</numero><poblacion>fgte</poblacion><pais>gegreg</pais></direccion></cliente></clientes>
+<?xml version="1.0" encoding="UTF-8"?>
+<productos>
+    <producto>
+        <codigo>6</codigo>
+        <nombre>Alfombra fashion</nombre>
+        <descripcion>frwfewfe</descripcion>
+        <stock>4</stock>
+        <pendientes>341</pendientes>
+        <localizacion>
+            <pasillo>3</pasillo>
+            <estanteria>1</estanteria>
+            <estante>3</estante>
+        </localizacion>
+    </producto>
+</productos>

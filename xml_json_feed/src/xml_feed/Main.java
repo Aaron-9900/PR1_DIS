@@ -120,7 +120,7 @@ public class Main {
 		    Transformer transformer = transformerFactory.newTransformer();
 		    DOMSource source = new DOMSource(document);
 
-		    StreamResult result = new StreamResult("productos.xml");
+		    StreamResult result = new StreamResult("clientes.xml");
 		    transformer.transform(source, result);
 			
 		} catch(Exception a) {
@@ -129,71 +129,90 @@ public class Main {
 		
 		return listaClientes;
 	}
-	public static ArrayList<Pedido> agregarPedido() throws IOException {
+	public static ArrayList<Pedido> agregarPedido() throws IOException, ParserConfigurationException, SAXException {
 		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
+		ArrayList<Integer> cantidadProductos = new ArrayList<Integer>();
+		ArrayList<Producto> listaProductos = new ArrayList<Producto>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder(); 
 		
 		Document docProductos = builder.parse(new File("productos.xml"));
-		NodeList listaProductos = docProductos.getElementsByTagName("producto");
+		NodeList listaProductos1 = docProductos.getElementsByTagName("producto");
 		
 		Document docClientes = builder.parse(new File("clientes.xml"));
-		NodeList listaClientes = docProductos.getElementsByTagName("cliente");
+		NodeList listaClientes = docClientes.getElementsByTagName("cliente");
 		
 		int input = 0;
 		int i = 0;
 		int iter = 0;
+		int otroPedido = 0;
 		do {
 			if(iter == 0) {
 				System.out.println("Ahora está introducciendo un pedido.");
 			}
-			System.out.println("Codigo de producto:");
-			String cod = in.readLine();
-			Producto prd = new Producto();
-			while(i != -1) {
-				for(i = 0; i < listaProductos.getLength(); i++) {
-					Node nodo = listaProductos.item(i);
-					
-					Element elemento = (Element) nodo;
-					Producto prod = new Producto();
-					
-					if(elemento.getElementsByTagName("codigo").item(0).getTextContent() == cod) {
-						prod.setCodigo(Integer.parseInt(elemento.getElementsByTagName("codigo").item(0).getTextContent()));
-						prod.setDescripcion(elemento.getElementsByTagName("descripcion").item(0).getTextContent());
-						prod.setPendientes(Integer.parseInt(elemento.getElementsByTagName("codigo").item(0).getTextContent()));
-						prod.setStock(Integer.parseInt(elemento.getElementsByTagName("stock").item(0).getTextContent()));
+			do {
+				System.out.println("Codigo de producto:");
+				String cod = in.readLine();
+				Producto prod = new Producto();
+				while(i != -1) {
+					if(i != 0) {
+						cod = in.readLine();
+					}
+					for(i = 0; i < listaProductos1.getLength(); i++) {
+						Node nodo = listaProductos1.item(i);
 						
-						Node nodoLoc = elemento.getElementsByTagName("localizacion").item(0);
-						Element elementoLoc = (Element) nodoLoc;
+						Element elemento = (Element) nodo;
 						
-						Localizacion loc = new Localizacion();
-						
-						loc.setEstante(Integer.parseInt(elementoLoc.getElementsByTagName("estante").item(0).getTextContent()));
-						loc.setEstanteria(Integer.parseInt(elementoLoc.getElementsByTagName("estanteria").item(0).getTextContent()));
-						loc.setPasillo(Integer.parseInt(elementoLoc.getElementsByTagName("pasillo").item(0).getTextContent()));
-						
-						prod.setLocalizacion(loc);
-						i = -1;
-						break;
+						if(elemento.getElementsByTagName("codigo").item(0).getTextContent().equals(cod)) {
+							prod.setCodigo(Integer.parseInt(elemento.getElementsByTagName("codigo").item(0).getTextContent()));
+							prod.setDescripcion(elemento.getElementsByTagName("descripcion").item(0).getTextContent());
+							prod.setPendientes(Integer.parseInt(elemento.getElementsByTagName("codigo").item(0).getTextContent()));
+							prod.setStock(Integer.parseInt(elemento.getElementsByTagName("stock").item(0).getTextContent()));
+							
+							Node nodoLoc = elemento.getElementsByTagName("localizacion").item(0);
+							Element elementoLoc = (Element) nodoLoc;
+							
+							Localizacion loc = new Localizacion();
+							
+							loc.setEstante(Integer.parseInt(elementoLoc.getElementsByTagName("estante").item(0).getTextContent()));
+							loc.setEstanteria(Integer.parseInt(elementoLoc.getElementsByTagName("estanteria").item(0).getTextContent()));
+							loc.setPasillo(Integer.parseInt(elementoLoc.getElementsByTagName("pasillo").item(0).getTextContent()));
+							
+							prod.setLocalizacion(loc);
+							i = -1;
+							break;
+							
+						}
 						
 					}
-					
+					if(i == -1) {
+						break;
+					}
+					System.out.println("Codigo Incorrecto. Introduzca otro:");
+
 				}
-				System.out.println("Codigo Incorrecto. Introduzca otro:");
-			}
-			System.out.println("Cuantos productos de este tipo quiere?");
+				System.out.println("Cuantos productos de este tipo quiere?");
+				Integer cantidadPedidos = Integer.parseInt(in.readLine());
+				listaProductos.add(prod);
+				cantidadProductos.add(cantidadPedidos);
+				
+				System.out.println("Quiere anyadir otro producto? \n0.- No\n 1.- Si");
+				i = 0;
+
+			} while(otroPedido != 0);
 			
 			i = 0;
 			System.out.println("Nombre de cliente:");
 			String nom = in.readLine();
+			Cliente cli = new Cliente();
+
 			while(i != -1) {
 				System.out.println("Nombre de cliente:");
 				for(i = 0; i < listaClientes.getLength(); i++) {
 					Node nodo = listaClientes.item(i);
 					
 					Element elemento = (Element) nodo;
-					Cliente cli = new Cliente();
 					
 					if(elemento.getElementsByTagName("nombre").item(0).getTextContent() == nom) {
 						cli.setTelf(Integer.parseInt(elemento.getElementsByTagName("telefono").item(0).getTextContent()));
@@ -214,9 +233,29 @@ public class Main {
 				System.out.println("Nombre de cliente incorrecto. Introduzca otro por favor.");
 
 			}
+			System.out.println("Introducir direccion ");
 			
+			System.out.println("Calle:");
+			String calle = in.readLine();
 			
-			System.out.println("¿Desea introducir otro producto?");
+			System.out.println("Codigo Postal:");
+			Integer cp = Integer.parseInt(in.readLine());
+			
+			System.out.println("Numero:");
+			Integer numero = Integer.parseInt(in.readLine());
+			
+			System.out.println("Poblacion:");
+			String poblacion = in.readLine();
+			
+			System.out.println("Pais:");
+			String pais = in.readLine();
+			
+			Direccion dir = new Direccion(calle, cp, numero, poblacion, pais);
+			
+			Pedido ped = new Pedido(listaProductos, cantidadProductos, dir, cli);
+			
+			listaPedidos.add(ped);
+			System.out.println("¿Desea introducir otro pedido?");
 			System.out.println("1- Si");
 			System.out.println("2- No");
 			input = Integer.parseInt(in.readLine());
@@ -229,27 +268,25 @@ public class Main {
 	        Document document = documentBuilder.parse("clientes.xml");
 	        Element root = document.getDocumentElement();
 	        
-	        /*
-	         * 			for(int i = 0; i < listaClientes.size(); i++) {
-				Cliente clienteActual = listaClientes.get(i);
-				Element prod = clienteToXML(clienteActual, document);
+	        
+     		for(i = 0; i < listaPedidos.size(); i++) {
+				Pedido pedidoActual = listaPedidos.get(i);
+				Element prod = pedidoToXML(pedidoActual, document);
 	            root.appendChild(prod);
 			}
-	         * */
-
 			
 		    TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		    Transformer transformer = transformerFactory.newTransformer();
 		    DOMSource source = new DOMSource(document);
 
-		    StreamResult result = new StreamResult("productos.xml");
+		    StreamResult result = new StreamResult("clientes.xml");
 		    transformer.transform(source, result);
 			
 		} catch(Exception a) {
 			
 		}
 		
-		return listaClientes;
+		return listaPedidos;
 	}
 	public static Direccion leerDireccionXML(Element elementoDir) {
 		Direccion direccion = new Direccion();
