@@ -36,7 +36,9 @@ public class Producto {
 		this.localizacion = localizacion;
 		this.pendientes = pendientes;
 	}
-
+	public Producto() {
+		
+	}
 	/**
 	 * @return the codigo
 	 */

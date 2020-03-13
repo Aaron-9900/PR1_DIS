@@ -23,7 +23,9 @@ public class Direccion {
 		this.poblacion = poblacion;
 		this.pais = pais;
 	}
-
+	public Direccion() {
+		
+	}
 	/**
 	 * @return the calle
 	 */

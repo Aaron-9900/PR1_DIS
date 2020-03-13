@@ -39,9 +39,9 @@ public class Main {
 		System.out.println("**************************");
 		System.out.println("1.- Introducir productos en fichero");
 		System.out.println("2.- Introducir clientes en fichero");
-		System.out.println("2.- Leer xml");
 		System.out.println("3.- validate to Xml");
 		System.out.println("4.- Mocks");
+		System.out.println("5.- Crear pedido");
 		System.out.println("0.- Quit");
 	}
 	
@@ -129,7 +129,139 @@ public class Main {
 		
 		return listaClientes;
 	}
-	
+	public static ArrayList<Pedido> agregarPedido() throws IOException {
+		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder(); 
+		
+		Document docProductos = builder.parse(new File("productos.xml"));
+		NodeList listaProductos = docProductos.getElementsByTagName("producto");
+		
+		Document docClientes = builder.parse(new File("clientes.xml"));
+		NodeList listaClientes = docProductos.getElementsByTagName("cliente");
+		
+		int input = 0;
+		int i = 0;
+		int iter = 0;
+		do {
+			if(iter == 0) {
+				System.out.println("Ahora está introducciendo un pedido.");
+			}
+			System.out.println("Codigo de producto:");
+			String cod = in.readLine();
+			Producto prd = new Producto();
+			while(i != -1) {
+				for(i = 0; i < listaProductos.getLength(); i++) {
+					Node nodo = listaProductos.item(i);
+					
+					Element elemento = (Element) nodo;
+					Producto prod = new Producto();
+					
+					if(elemento.getElementsByTagName("codigo").item(0).getTextContent() == cod) {
+						prod.setCodigo(Integer.parseInt(elemento.getElementsByTagName("codigo").item(0).getTextContent()));
+						prod.setDescripcion(elemento.getElementsByTagName("descripcion").item(0).getTextContent());
+						prod.setPendientes(Integer.parseInt(elemento.getElementsByTagName("codigo").item(0).getTextContent()));
+						prod.setStock(Integer.parseInt(elemento.getElementsByTagName("stock").item(0).getTextContent()));
+						
+						Node nodoLoc = elemento.getElementsByTagName("localizacion").item(0);
+						Element elementoLoc = (Element) nodoLoc;
+						
+						Localizacion loc = new Localizacion();
+						
+						loc.setEstante(Integer.parseInt(elementoLoc.getElementsByTagName("estante").item(0).getTextContent()));
+						loc.setEstanteria(Integer.parseInt(elementoLoc.getElementsByTagName("estanteria").item(0).getTextContent()));
+						loc.setPasillo(Integer.parseInt(elementoLoc.getElementsByTagName("pasillo").item(0).getTextContent()));
+						
+						prod.setLocalizacion(loc);
+						i = -1;
+						break;
+						
+					}
+					
+				}
+				System.out.println("Codigo Incorrecto. Introduzca otro:");
+			}
+			System.out.println("Cuantos productos de este tipo quiere?");
+			
+			i = 0;
+			System.out.println("Nombre de cliente:");
+			String nom = in.readLine();
+			while(i != -1) {
+				System.out.println("Nombre de cliente:");
+				for(i = 0; i < listaClientes.getLength(); i++) {
+					Node nodo = listaClientes.item(i);
+					
+					Element elemento = (Element) nodo;
+					Cliente cli = new Cliente();
+					
+					if(elemento.getElementsByTagName("nombre").item(0).getTextContent() == nom) {
+						cli.setTelf(Integer.parseInt(elemento.getElementsByTagName("telefono").item(0).getTextContent()));
+						cli.setNombre(elemento.getElementsByTagName("nombre").item(0).getTextContent());
+						cli.setApellido(elemento.getElementsByTagName("apellido").item(0).getTextContent());
+												
+						Node nodoDir = elemento.getElementsByTagName("direccion").item(0);
+						Element elementoDir = (Element) nodoDir;
+						
+						Direccion dir = leerDireccionXML(elementoDir);
+						
+						cli.setDireccion(dir);
+						i = -1;
+						break;
+						
+					}	
+				}
+				System.out.println("Nombre de cliente incorrecto. Introduzca otro por favor.");
+
+			}
+			
+			
+			System.out.println("¿Desea introducir otro producto?");
+			System.out.println("1- Si");
+			System.out.println("2- No");
+			input = Integer.parseInt(in.readLine());
+			
+			
+		}while(input != 2);
+		try {
+	        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+	        Document document = documentBuilder.parse("clientes.xml");
+	        Element root = document.getDocumentElement();
+	        
+	        /*
+	         * 			for(int i = 0; i < listaClientes.size(); i++) {
+				Cliente clienteActual = listaClientes.get(i);
+				Element prod = clienteToXML(clienteActual, document);
+	            root.appendChild(prod);
+			}
+	         * */
+
+			
+		    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		    Transformer transformer = transformerFactory.newTransformer();
+		    DOMSource source = new DOMSource(document);
+
+		    StreamResult result = new StreamResult("productos.xml");
+		    transformer.transform(source, result);
+			
+		} catch(Exception a) {
+			
+		}
+		
+		return listaClientes;
+	}
+	public static Direccion leerDireccionXML(Element elementoDir) {
+		Direccion direccion = new Direccion();
+		
+		direccion.setCalle(elementoDir.getElementsByTagName("calle").item(0).getTextContent());
+		direccion.setPais(elementoDir.getElementsByTagName("pais").item(0).getTextContent());
+		direccion.setPoblacion(elementoDir.getElementsByTagName("poblacion").item(0).getTextContent());
+		direccion.setNumero(Integer.parseInt(elementoDir.getElementsByTagName("numero").item(0).getTextContent()));
+		direccion.setCodigoPostal(Integer.parseInt(elementoDir.getElementsByTagName("codigoPostal").item(0).getTextContent()));
+		
+		return direccion;
+	}
 	public static ArrayList<Producto> introducirProductos() throws IOException 
 	{
 		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -427,7 +559,11 @@ public class Main {
 						} catch(Exception e) {
 						}
 						break;
+					case 5:
+						agregarPedido();
+						break;
 				}
+				
 				System.out.println("Saliendo del programa");
 			}
 				
