@@ -1,15 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<productos>
-    <producto>
-        <codigo>1</codigo>
-        <nombre>1</nombre>
-        <descripcion>1</descripcion>
-        <stock>1</stock>
-        <pendientes>1</pendientes>
-        <localizacion>
-            <pasillo>1</pasillo>
-            <estanteria>1</estanteria>
-            <estante>1</estante>
-        </localizacion>
-    </producto>
-</productos>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE productos SYSTEM "productos.dtd"><productos><producto><nombre>1</nombre><codigo>1</codigo><descripcion>1</descripcion><stock>1</stock><pendientes>1</pendientes><localizacion><pasillo>1</pasillo><estanteria>1</estanteria><estante>1</estante></localizacion></producto></productos>

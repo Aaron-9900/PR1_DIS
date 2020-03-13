@@ -1,6 +1,6 @@
 <!ELEMENT pedidos (pedido)*>
-<!ELEMENT pedido (direccion,(cliente)*,productos)>
-<!ELEMENT direccion (calle,numero,codigoPostal,poblacion,pais)>
+<!ELEMENT pedido (productos, cliente,direccion)*>
+<!ELEMENT direccion (calle,codigoPostal, numero,poblacion,pais)>
 <!ELEMENT calle (#PCDATA)>
 <!ELEMENT numero (#PCDATA)>
 <!ELEMENT codigoPostal (#PCDATA)>
@@ -14,7 +14,7 @@
 <!ELEMENT telefono (#PCDATA)>
 
 <!ELEMENT productos (producto)*>
-<!ELEMENT producto (codigo, nombre,descripcion,stock,pendientes,localizacion)>
+<!ELEMENT producto ( nombre,codigo,descripcion,stock,pendientes,localizacion)>
 <!ATTLIST producto cantidad CDATA   #IMPLIED>
 <!ELEMENT codigo (#PCDATA)>
 <!ELEMENT descripcion (#PCDATA)>

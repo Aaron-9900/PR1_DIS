@@ -290,11 +290,15 @@ public class Main {
 		    transformer.transform(source, result);
 		    
 		    String inputi = "";
-		    try { 
-		    	 	inputi = new String(Files.readAllBytes(Paths.get("productos.xml")));
-		    	 	inputi = inputi.replace("?>", "?><!DOCTYPE pedidos SYSTEM \"pedidos.dtd\">");
+		    try {
+		    	inputi = new String(Files.readAllBytes(Paths.get("productos.xml")));
+		    	if(!inputi.contains("<!DOCTYPE"))
+    			{
+		    	 	
+		    	 	inputi = inputi.replace("?>", "?><!DOCTYPE productos SYSTEM \"productos.dtd\">");
 		    	 	System.out.println(input);
 				    writeToFile(inputi,fichero);
+    			}
 		    	} catch (IOException e) { 
 		    		e.printStackTrace();
 		    	}
@@ -381,9 +385,13 @@ public class Main {
 		    String inputp = "";
 		    try { 
 		    	 	inputp = new String(Files.readAllBytes(Paths.get("pedidos.xml")));
-		    	 	inputp = inputp.replace("?>", "?><!DOCTYPE productos SYSTEM \"productos.dtd\">");
-		    	 	System.out.println(input);
-				    writeToFile(inputp,fichero);
+		    	 	
+		    	 	if(!inputp.contains("<!DOCTYPE"))
+	    			{
+		    	 		inputp = inputp.replace("?>", "?><!DOCTYPE productos SYSTEM \"productos.dtd\">");
+			    	 	System.out.println(input);
+					    writeToFile(inputp,fichero);
+	    			}
 		    	} catch (IOException e) { 
 		    		e.printStackTrace();
 		    	}
@@ -625,14 +633,16 @@ public class Main {
 						    String input = "";
 						    try { 
 						    	 	input = new String(Files.readAllBytes(Paths.get("pedidos.xml")));
-						    	 	input = input.replace("?>", "?> <!DOCTYPE pedidos SYSTEM \"pedidos.dtd\">");
-						    	 	System.out.println(input);
-								    writeToFile(input, "JsonFile.xml");
+							    	if(!input.contains("<!DOCTYPE"))
+					    			{
+							    		input = input.replace("?>", "?> <!DOCTYPE pedidos SYSTEM \"pedidos.dtd\">");
+							    	 	System.out.println(input);
+									    writeToFile(input, "pedidos.xml");
+					    			}
+						    	 	
 						    	} catch (IOException e) { 
 						    		e.printStackTrace();
-						    	}
-
-						    
+						    	}				    
 
 						} catch(Exception e) {
 						}
